@@ -42,10 +42,7 @@ const tokenName =
     ? 'next-auth.session-token'
     : '__Secure-next-auth.session-token';
 
-export const authOptions: (
-      req?: NextApiRequest,
-      res?: NextApiResponse
-    ) => NextAuthOptions = (req, res) => ({
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -124,11 +121,11 @@ export const authOptions: (
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     signIn: async({ user, account, profile }) => {
-      if (account?.provider === 'facebook' && profile?.picture?.data?.url) {
-        user.image = profile.picture.data.url;
-      }
-      console.log(user.image);
-      console.log(encodeURIComponent(user.image as string));
+      // if (account?.provider === 'facebook' && profile?.picture?.data?.url) {
+      //   user.image = profile.picture.data.url;
+      // }
+      // console.log(user.image);
+      // console.log(encodeURIComponent(user.image as string));
 
       return true;
     },
@@ -173,4 +170,4 @@ export const authOptions: (
   },
 
   debug: process.env.NODE_ENV === "development",
-});
+};
